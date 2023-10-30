@@ -71,9 +71,9 @@
     "location_id": "$(location-id-esc)",
     "location_name": "$(location-name-esc)"
 }
+```
 some params that has ***-esc***
 you should use ***decodeURIComponent***  to decode them
-```
 
 ### Getting started
 
