@@ -1,4 +1,4 @@
-# mikrotik-hotspot-json Osamah Alhumaidi
+# mikrotik-hotspot-json By Osamah Alhumaidi
 
 ### Features
 - you can get or post json data from hotspot server
@@ -82,7 +82,7 @@ Call the generic.js file from html
 ```html
   <script src="/generic.js"></script>
 ```
-###now you can use get post method 
+### now you can use get post method 
 
 to get json data you should pass param **var=json** in requested url EX: ***http://example.com/login?var=json***
 
@@ -95,7 +95,7 @@ ajax.get('/',{'var' : 'json'},function(res){console.log(res);});
 ```
 
 
-###get Json Data like chap-id and chap-challenge then login 
+### get Json Data like chap-id and chap-challenge then login 
 
 ```html
 <script src="/md5.js"></script>
@@ -120,4 +120,10 @@ ajax.get('/',{ 'var' : 'json' },function(res){
 });
 </script>
 ```
+### Refrence
+ mikrotik wiki : ***https://wiki.mikrotik.com/wiki/Manual:Customizing_Hotspot***
+
+### contact 
+Email: ***osamahfarhan995@gmail.com***
+Fb: ***http://fb.com/osamahfarhan***
 
