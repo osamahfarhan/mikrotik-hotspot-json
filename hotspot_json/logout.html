@@ -1,0 +1,5 @@
+$(if http-status == 302)Hotspot Redirect$(endif)
+$(if http-header == "Location")$(link-login)$(if var)?var=$(var)$(endif)$(endif)
+$(if http-header == "Access-Control-Allow-Origin")*$(endif)
+$(if http-header == "Cross-Origin-Resource-Policy")cross-origin$(endif)
+$(if http-header == "Set-Cookie")$(if var == "json")loginID$(else)null$(endif)=deleted; path=/login; expires=Thu, 01 Jan 1970 00:00:00 GMT$(endif)

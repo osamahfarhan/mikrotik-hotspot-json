@@ -1,0 +1,111 @@
+$(if var != "json")
+<html>
+<head>
+<meta http-equiv="refresh" content="2; url=$(link-orig)">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />   
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<title>Internet hotspot - Advertisement</title>
+<link rel="stylesheet" href="css/style.css">
+<script>
+
+    var popup = '';
+    function openOrig() {
+	if (window.focus) popup.focus();
+	location.href = unescape('$(link-orig-esc)');
+    }
+    function openAd() {
+	location.href = unescape('$(link-redirect-esc)');
+    }
+    function openAdvert() {
+	if (window.name != 'hotspot_advert') {
+		popup = open('$(link-redirect)', 'hotspot_advert', '');
+		setTimeout("openOrig()", 1000);
+		return;
+	}
+	setTimeout("openAd()", 1000);
+    }
+</script>
+</head>
+<body onLoad="openAdvert()">
+    <div class="ie-fixMinHeight">
+        <div class="main">
+            <div class="wrap">
+                <h1>Advertisement</h1>
+                <p class="info">If nothing happens, open <a href="$(link-redirect)" target="hotspot_advert">advertisement</a> manually.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+$(else)
+{
+    "idle_timeout": "$(idle-timeout)",
+    "refresh_timeout": "$(refresh-timeout)",
+    "uptime": "$(uptime)",
+    "session_timeout": "$(session-timeout)",
+    "session_time_left": "$(session-time-left)",
+    "bytes_in_nice": "$(bytes-in-nice)",
+    "bytes_out_nice": "$(bytes-out-nice)",
+    "idle_timeout_secs": "$(idle-timeout-secs)",
+    "refresh_timeout_secs": "$(refresh-timeout-secs)",
+    "uptime_secs": "$(uptime-secs)",
+    "limit_bytes_in": "$(limit-bytes-in)",
+    "limit_bytes_out": "$(limit-bytes-out)",
+    "limit_bytes_total": "$(limit-bytes-total)",
+    "session_timeout_secs": "$(session-timeout-secs)",
+    "session_time_left_secs": "$(session-time-left-secs)",
+    "bytes_in": "$(bytes-in)",
+    "bytes_out": "$(bytes-out)",
+    "packets_in": "$(packets-in)",
+    "packets_out": "$(packets-out)",
+    "remain_bytes_in": "$(remain-bytes-in)",
+    "remain_bytes_out": "$(remain-bytes-out)",
+    "remain_bytes_total": "$(remain-bytes-total)",
+    "login_by_mac": "$(login-by-mac)",
+    "logged_in": "$(logged-in)",
+    "erase_cookie":"$(erase-cookie)",
+    "popup":"$(popup)",
+    "advert_pending": "$(advert-pending)",
+    "blocked": "$(blocked)",
+    "trial": "$(trial)",
+    "radius": "$(radius)",
+    "plain_passwd": "$(plain-passwd)",
+    "ssl_login": "$(ssl-login)",
+    "chap_id": "$(chap-id-esc)",
+    "chap_challenge": "$(chap-challenge-esc)",
+    "error": "$(error-esc)",
+    "error_orig": "$(error-orig-esc)",
+    "error_type": "$(error-type-esc)",
+    "session_id": "$(session-id)",
+    "server_address": "$(server-address)",
+    "vlan_id": "$(vlan-id)",
+    "ip": "$(ip)",
+    "host_ip": "$(host-ip)",
+    "link_orig": "$(link-orig-esc)",
+    "link_redirect": "$(link-redirect-esc)",
+    "link_login": "$(link-login-esc)",
+    "link_login_only": "$(link-login-only-esc)",
+    "link_logout": "$(link-logout-esc)",
+    "link_status": "$(link-status-esc)",
+    "link_advert": "$(link-advert-esc)",
+    "var": "$(var-esc)",
+    "login_by": "$(login-by)",
+    "mac": "$(mac)",
+    "username": "$(username-esc)",
+    "domain": "$(domain-esc)",
+    "user_agent": "$(user-agent-esc)",
+    "target_dir": "$(target-dir-esc)",
+    "dst": "$(link-orig-esc)",
+    "hostname": "$(hostname-esc)",
+    "identity": "$(identity-esc)",
+    "interface_name": "$(interface-name-esc)",
+    "server_name": "$(server-name-esc)",
+    "location_id": "$(location-id-esc)",
+    "location_name": "$(location-name-esc)"
+}
+$(endif)
+$(if http-header == "Content-Type")$(if var == "json")application/json$(else)text/html$(endif)$(endif)
+$(if http-header == "Access-Control-Allow-Origin")*$(endif)
+$(if http-header == "Cross-Origin-Resource-Policy")cross-origin$(endif)
