@@ -71,6 +71,8 @@
     "location_id": "$(location-id-esc)",
     "location_name": "$(location-name-esc)"
 }
+some params that has ***-esc***
+you should use ***decodeURIComponent***  to decode them
 ///...
 
 
@@ -90,7 +92,7 @@ using javascrpt
 ```html
 <script src="/generic.js"></script>
 <script>
-ajax.get('/',{var:"json"},function(res){console.log(res);});
+ajax.get('/',{'var' : 'json'},function(res){console.log(res);});
 </script>
 ///...
 
@@ -103,7 +105,7 @@ ajax.get('/',{var:"json"},function(res){console.log(res);});
 <script>
 var username = 'test';
 var password = 'test';
-ajax.get('/',{var:"json"},function(res){
+ajax.get('/',{ 'var' : 'json' },function(res){
   var obj = {  };
   try {
       obj = JSON.parse(res);
@@ -115,7 +117,8 @@ ajax.get('/',{var:"json"},function(res){
     chapChallenge = eval("'"+chapChallenge+"'");
     password =  hexMD5(chapId + password + chapChallenge);
   }
-  ajax.post('/',{ var : "json",'username':username,'password':password } ,function(res){console.log(res);});
+  LoginUrl =  obj.link_login_only || '/';
+  ajax.post(LoginUrl,{ 'var' : 'json','username':username,'password':password } ,function(res){console.log(res);});
 });
 </script>
 ///...
