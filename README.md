@@ -73,8 +73,7 @@
 }
 some params that has ***-esc***
 you should use ***decodeURIComponent***  to decode them
-///...
-
+```
 
 ### Getting started
 
@@ -82,8 +81,7 @@ Call the generic.js file from html
 
 ```html
   <script src="/generic.js"></script>
-///...
-
+```
 ###now you can use get post method 
 
 to get json data you should pass param **var=json** in requested url EX: ***http://example.com/login?var=json***
@@ -94,7 +92,7 @@ using javascrpt
 <script>
 ajax.get('/',{'var' : 'json'},function(res){console.log(res);});
 </script>
-///...
+```
 
 
 ###get Json Data like chap-id and chap-challenge then login 
@@ -121,5 +119,5 @@ ajax.get('/',{ 'var' : 'json' },function(res){
   ajax.post(LoginUrl,{ 'var' : 'json','username':username,'password':password } ,function(res){console.log(res);});
 });
 </script>
-///...
+```
 
