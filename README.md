@@ -103,27 +103,61 @@ ajax.get('/',{'var' : 'json'},function(res){console.log(res);});
 <script>
 var username = 'test';
 var password = 'test';
+function toJson(str) {
+    let obj = { };
+    try {
+        obj = JSON.parse(decodeURIComponent(res));
+        obj.chap_id = eval("'" + obj.chap_id + "'");
+        obj.chap_challenge = eval("'" + obj.chap_challenge + "'");
+    } catch (e) {console.error(e);}
+    return obj;
+}
 ajax.get('/',{ 'var' : 'json' },function(res){
-  var obj = {  };
-  try {
-      obj = JSON.parse(res);
-  } catch (e) { }
-  if (obj.plain_passwd == 'yes' && obj.chap_id && (obj.chap_id).length > 0) {
-    var chapId = decodeURIComponent(obj.chap_id);
-    var chapChallenge = decodeURIComponent(obj.chap_challenge);
-    chapId = eval("'"+chapId+"'");
-    chapChallenge = eval("'"+chapChallenge+"'");
-    password =  hexMD5(chapId + password + chapChallenge);
+  let obj = toJson(res);
+  if (obj.plain_passwd == 'yes' && obj.chap_id) {
+    password =  hexMD5(obj.chap_id + password + obj.chap_challenge);
   }
-  LoginUrl =  obj.link_login_only || '/';
+  let LoginUrl =  obj.link_login_only || '/';
   ajax.post(LoginUrl,{ 'var' : 'json','username':username,'password':password } ,function(res){console.log(res);});
 });
 </script>
 ```
+### build your Functions
+
+```html
+<script src="/md5.js"></script>
+<script src="/generic.js"></script>
+<script>
+ async function getJson() {
+    const response = await fetch('?var=json', { method: 'GET', headers: { "Content-Type": "application/json" } });
+    const json = await response.json();
+    return json;
+}
+function doLogin(username, password) {
+    getJson().then((e) => {
+        console.log(e);
+        e.chap_id = eval("'" + decodeURIComponent(e.chap_id) + "'");
+        e.chap_challenge = eval("'" + decodeURIComponent(e.chap_challenge) + "'");
+        e.link_login_only = decodeURIComponent(e.link_login_only);
+        if (e.plain_passwd == 'yes') {
+            password = hexMD5(e.chap_id + password + e.chap_challenge);
+        }
+        let data = { 'username': username, 'password': password };
+        let link_login_only = e.link_login_only || '/';
+        ajax.post(link_login_only, { 'var': 'json', 'username': username, 'password': password }, function (res) { console.log(res); });
+    })
+}
+doLogin('test','test');
+</script>
+```
+### Enjoy (* @ *)
+
+
 ### Refrence
  mikrotik wiki : ***https://wiki.mikrotik.com/wiki/Manual:Customizing_Hotspot***
 
 ### contact 
-Email: ***osamahfarhan995@gmail.com***
+Email: ***osamahfarhan1995@gmail.com***
+
 Fb: ***http://fb.com/osamahfarhan***
 
