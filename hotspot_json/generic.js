@@ -1,5 +1,5 @@
 var ajax = {};
-ajax.x = function () {
+ajax.x = function() {
     if (typeof XMLHttpRequest !== 'undefined') {
         return new XMLHttpRequest();
     }
@@ -12,7 +12,7 @@ ajax.x = function () {
     ];
 
     var xhr;
-    for (var i = 0; i < versions.length; i++) {
+    for(var i = 0; i < versions.length; i++) {
         try {
             xhr = new ActiveXObject(versions[i]);
             break;
@@ -22,10 +22,10 @@ ajax.x = function () {
     return xhr;
 };
 
-ajax.send = function (url, callback, method, data, sync) {
+ajax.send = function(url, callback, method, data, sync) {
     var x = ajax.x();
     x.open(method, url, sync);
-    x.onreadystatechange = function () {
+    x.onreadystatechange = function() {
         if (x.readyState == 4) {
             callback(x.responseText)
         }
@@ -36,7 +36,7 @@ ajax.send = function (url, callback, method, data, sync) {
     x.send(data)
 };
 
-ajax.get = function (url, data, callback, sync) {
+ajax.get = function(url, data, callback, sync) {
     var query = [];
     for (var key in data) {
         query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
@@ -44,7 +44,7 @@ ajax.get = function (url, data, callback, sync) {
     ajax.send(url + '?' + query.join('&'), callback, 'GET', null, sync)
 };
 
-ajax.post = function (url, data, callback, sync) {
+ajax.post = function(url, data, callback, sync) {
     var query = [];
     for (var key in data) {
         query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
@@ -58,14 +58,14 @@ function getQueryObj() {
     var query_string = {};
     var query = window.location.search.substring(1);
     var vars = query.split("&");
-    for (var i = 0; i < vars.length; i++) {
+    for (var i=0;i<vars.length;i++) {
         var pair = vars[i].split("=");
         // If first entry with this name
         if (typeof query_string[pair[0]] === "undefined") {
             query_string[pair[0]] = pair[1];
             // If second entry with this name
         } else if (typeof query_string[pair[0]] === "string") {
-            var arr = [query_string[pair[0]], pair[1]];
+            var arr = [ query_string[pair[0]], pair[1] ];
             query_string[pair[0]] = arr;
             // If third or later entry with this name
         } else {
